@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:notnetflix/repositories/data_repository.dart';
 import 'package:notnetflix/ui/screens/home_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:notnetflix/ui/screens/loading_screen.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(create: (context)=> DataRepository(),
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title:'Not Netflix',
       debugShowCheckedModeBanner: false,
-      home:const HomeScreen(),
+      home:const LoadingScreen(),
 
     );
 }

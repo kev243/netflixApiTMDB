@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:notnetflix/repositories/data_repository.dart';
 import 'package:notnetflix/services/api_service.dart';
+import 'package:notnetflix/ui/screens/widgets/movie_card.dart';
+import 'package:notnetflix/ui/screens/widgets/movie_category.dart';
 import 'package:notnetflix/utils/constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:notnetflix/models/movie.dart';
@@ -13,25 +15,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
-
   @override
   void initState() {
     super.initState();
-    getMovies();
+    //getMovies();
   }
 
-  void getMovies()  async{
-   final dataProvider= Provider.of<DataRepository>(context,listen: false);
-   await dataProvider.getPopularMovies();
-  }
+  //void getMovies()  async{
+  //final dataProvider= Provider.of<DataRepository>(context,listen: false);
+  //await dataProvider.getPopularMovies();
+  //}
 
   @override
   Widget build(BuildContext context) {
-    final dataProvider= Provider.of<DataRepository>(context);
+    final dataProvider = Provider.of<DataRepository>(context);
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
+        //elevation: 0,
+        //backgroundColor: Colors.transparent,
         backgroundColor: kBackgroundColor,
         leading: Image.asset(
           'assets/images/Netflix.png',
@@ -42,95 +44,28 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(height: 15),
           Container(
             height: 500,
-            color: Colors.red,
+            color: aColor,
             child: dataProvider.popularMovieList.isEmpty
                 ? const Center()
-                : Image.network(dataProvider.popularMovieList[0].posterURL(), fit: BoxFit.cover),
+                : MovieCard(movie: dataProvider.popularMovieList.first),
           ),
-          const SizedBox(height: 15),
-          Text('Tendancs actuelles',
-              style: GoogleFonts.poppins(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              )),
-          const SizedBox(height: 15),
-          SizedBox(
-            height: 160,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin: EdgeInsets.only(right: 8),
-                    width: 110,
-                    //color: Colors.yellow,
-                    child: Center(
-                        child:  dataProvider.popularMovieList.isEmpty
-                            ? Center(
-                                child: Text(index.toString()),
-                              )
-                            : Image.network(dataProvider.popularMovieList[index].posterURL(),
-                             fit: BoxFit.cover
-                            ),
-                           
-                             
-                            
-                            ),
-                           
-                  );
-                }),
+          MovieCategory(
+            label: 'Tendancs actuelles',
+            movieList: dataProvider.popularMovieList,
+            imageHeight: 160,
+            imageWidth: 110,
+            callback: dataProvider.getPopularMovies
           ),
-          SizedBox(height: 15),
-          const SizedBox(height: 15),
-          Text('Actuellement en cinéma',
-              style: GoogleFonts.poppins(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              )),
-          const SizedBox(height: 15),
-          SizedBox(
-            height: 320,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin: EdgeInsets.only(right: 8),
-                    width: 220,
-                    color: Colors.blue,
-                    child: Center(
-                      child: Text(index.toString()),
-                    ),
-                  );
-                }),
+
+            MovieCategory(
+            label: 'Actuellement au cinéma',
+            movieList: dataProvider.popularMovieList,
+            imageHeight: 320,
+            imageWidth: 220,
+            callback: dataProvider.getPopularMovies
           ),
-          SizedBox(height: 15),
-          const SizedBox(height: 15),
-          Text('Ils arrivent bientôt',
-              style: GoogleFonts.poppins(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              )),
-          const SizedBox(height: 15),
-          SizedBox(
-            height: 160,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin: EdgeInsets.only(right: 8),
-                    width: 110,
-                    color: Colors.green,
-                    child: Center(
-                      child: Text(index.toString()),
-                    ),
-                  );
-                }),
-          ),
+
+        //   
         ],
       ),
     );
