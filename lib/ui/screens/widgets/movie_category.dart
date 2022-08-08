@@ -68,7 +68,9 @@ class MovieCategory extends StatelessWidget {
                   );
                 }),
           ),
+          
         ),
+         const SizedBox(height: 15),
       ],
     );
   }
