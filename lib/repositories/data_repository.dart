@@ -95,7 +95,17 @@ class DataRepository with ChangeNotifier {
 
   Future<Movie> getMovieDetails({required Movie movie})async{
     try {
+
+      //recuperer les infos du film
       Movie newMovie= await apiService.getMovieDetails(movie: movie);
+
+      //on recuperer les videos 
+       newMovie = await apiService.getMovieVideos(movie: newMovie);
+
+       //on recuperer les casting
+        newMovie = await apiService.getMovieCast(movie: newMovie);
+
+
       return newMovie;
     }on Response catch (response) {
       print("ERROR: ${response.statusCode}");
