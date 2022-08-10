@@ -4,6 +4,7 @@ import 'package:notnetflix/models/movie.dart';
 import 'package:notnetflix/repositories/data_repository.dart';
 import 'package:notnetflix/ui/screens/widgets/action_button.dart';
 import 'package:notnetflix/ui/screens/widgets/casting_card.dart';
+import 'package:notnetflix/ui/screens/widgets/galerie_card.dart';
 import 'package:notnetflix/ui/screens/widgets/movie_info.dart';
 import 'package:notnetflix/ui/screens/widgets/my_video_player.dart';
 import 'package:notnetflix/utils/constant.dart';
@@ -82,30 +83,55 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                       bgColor: Colors.grey.withOpacity(0.3),
                       color: Colors.white,
                     ),
-                       SizedBox(height: 20),
-
-                    Text(newMovie!.description, style: GoogleFonts.poppins(
-                      color: Colors.white
-                    ),),
-                     SizedBox(height: 20),
-
-                      Text('Casting', style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18
-                    ),),
-
-                     SizedBox(
+                    SizedBox(height: 20),
+                    Text(
+                      newMovie!.description,
+                      style: GoogleFonts.poppins(color: Colors.white),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'Casting',
+                      style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                    SizedBox(
                       height: 350,
                       child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: newMovie!.casting!.length,
-                        itemBuilder: (context, int index){
-                          return newMovie!.casting![index].imageURL== null? const Center(): CastingCard(person:newMovie!.casting![index]);
-                        }),
-                     )
+                          scrollDirection: Axis.horizontal,
+                          itemCount: newMovie!.casting!.length,
+                          itemBuilder: (context, int index) {
+                            return newMovie!.casting![index].imageURL == null
+                                ? const Center()
+                                : CastingCard(
+                                    person: newMovie!.casting![index]);
+                          }),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'Galerie',
+                      style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                    SizedBox(height: 10),
+                    SizedBox(
+                        height: 200,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: newMovie!.images!.length,
+                            itemBuilder: (context, int index) {
+                              return GalerieCard(
+                                posterPath: newMovie!.images![index],
+                              );
+                            })),
+                            SizedBox(height: 10),
                   ],
+                 
                 ),
+               
               ));
   }
 }

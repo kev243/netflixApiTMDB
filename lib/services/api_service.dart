@@ -204,6 +204,22 @@ class APIService {
 
   }
 
+Future<Movie> getMovieImage({required Movie movie }) async {
+  Response response= await getData ('/movie/${movie.id}/images', params: {
+    'include_image_language': 'null',
+  });
+     if (response.statusCode==200){
+      Map _data=response.data;
+
+      List<String> imagesPath = _data["backdrops"].map<String>((dynamic imageJson){
+        return imageJson["file_path"] as String;
+      }).toList();
+      return movie.copyWith(images: imagesPath);
+    }else {
+      throw response;
+    }
+}
+
   
 
 

@@ -105,6 +105,11 @@ class DataRepository with ChangeNotifier {
        //on recuperer les casting
         newMovie = await apiService.getMovieCast(movie: newMovie);
 
+        //on recupere les images du film
+         newMovie = await apiService.getMovieImage(movie: newMovie);
+
+
+
 
       return newMovie;
     }on Response catch (response) {
@@ -128,6 +133,7 @@ class DataRepository with ChangeNotifier {
       getUpComingMovies(),
       getAnimationMovies(),
       getDocumentaireMovies(),
+      
     ]);
   }
 }

@@ -41,6 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: ListView(
         children: [
+          SizedBox(height: 10),
+          Text(
+            'Le film le plus populaire',
+            style: GoogleFonts.poppins(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
+          ),
           SizedBox(height: 15),
           Container(
             height: 500,
@@ -56,42 +62,34 @@ class _HomeScreenState extends State<HomeScreen> {
             imageWidth: 110,
             callback: dataProvider.getPopularMovies,
           ),
-
-            MovieCategory(
+          MovieCategory(
             label: 'Actuellement au cinéma',
             movieList: dataProvider.nowPlaying,
             imageHeight: 320,
             imageWidth: 220,
             callback: dataProvider.getNowPlaying,
           ),
-
-           MovieCategory(
+          MovieCategory(
             label: 'Ils arrivent bientôt',
             movieList: dataProvider.upComingMovies,
             imageHeight: 160,
             imageWidth: 110,
             callback: dataProvider.getUpComingMovies,
-           ),
-
-            MovieCategory(
+          ),
+          MovieCategory(
             label: 'Animation',
             movieList: dataProvider.animationMovies,
             imageHeight: 320,
             imageWidth: 220,
             callback: dataProvider.getAnimationMovies,
-           ),
-
-            MovieCategory(
+          ),
+          MovieCategory(
             label: 'Documentaire',
             movieList: dataProvider.documentaireMovies,
             imageHeight: 160,
             imageWidth: 110,
             callback: dataProvider.getDocumentaireMovies,
-           ),
-
-           
-
-          
+          ),
         ],
       ),
     );
